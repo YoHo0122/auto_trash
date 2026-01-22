@@ -1,0 +1,29 @@
+name: Auto Trash for Notion
+
+on:
+  workflow_dispatch:
+  schedule:
+    # GitHub ActionsのcronはUTCです（例：14:30 JSTなら 05:30 UTC）:contentReference[oaicite:13]{index=13}
+     - cron: "30 5 * * *"
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - run: npm install --no-audit --no-fund
+
+      - name: Run cleanup
+        env:
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          NOTION_DATA_SOURCE_ID: ${{ secrets.NOTION_DATA_SOURCE_ID }}
+          EXEC_DATE_PROPERTY: "実行日"
+          AUTO_DELETE_PROPERTY: "自動削除"
+          DAYS: "7"
+          DRY_RUN: "true" # 初回はtrue推奨
+        run: node scripts/notion_cleanup.js
