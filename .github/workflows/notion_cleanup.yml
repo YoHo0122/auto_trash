@@ -25,5 +25,5 @@ jobs:
           EXEC_DATE_PROPERTY: "実行日"
           AUTO_DELETE_PROPERTY: "自動削除"
           DAYS: "7"
-          DRY_RUN: "true" # 初回はtrue推奨
+          DRY_RUN: "false" # 初回はtrue推奨
         run: node scripts/notion_cleanup.js
