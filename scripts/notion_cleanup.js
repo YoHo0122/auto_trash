@@ -4,7 +4,7 @@ const { Client } = require("@notionhq/client");
 const {
   NOTION_TOKEN,
   NOTION_DATA_SOURCE_ID,
-  EXEC_DATE_PROPERTY = "実行日",
+  EXEC_DATE_PROPERTY = "実行予定日",
   AUTO_DELETE_PROPERTY = "自動削除",
   DAYS = "7",
   DRY_RUN = "true",
